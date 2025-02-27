@@ -1,8 +1,11 @@
 package edu.neumont.mgt101.controller;
 
 import edu.neumont.mgt101.model.OTC;
+import edu.neumont.mgt101.model.Transaction;
 import edu.neumont.mgt101.model.User;
 import edu.neumont.mgt101.view.UI;
+
+import java.util.ArrayList;
 
 public class Controller {
 
@@ -10,10 +13,13 @@ public class Controller {
 
     User user = new User(null, null);
     OTC oneTimeCode = new OTC();
+    Transaction transactionCenter = new Transaction();
     boolean running = true;
     boolean firstOpened = true;
     boolean createdUser = false;
     boolean loggedIn = false;
+    boolean managingTransaction = false;
+    ArrayList<String> transactions = new ArrayList<>();
 
     //endregion
 
@@ -91,7 +97,31 @@ public class Controller {
                         loggedIn = false;
                     }
                     break;
+                case 2:
+                    transactionMenu();
             }
         }while(loggedIn);
     }
+
+    private void transactionMenu(){
+        managingTransaction = true;
+        do{
+            UI.br();
+            switch (UI.transactionMenu()){
+                case 1:
+                    transactionCenter.addTransaction(transactions);
+                    break;
+                case 2:
+                    transactionCenter.listTransactions(transactions);
+                    break;
+                case 3:
+                    transactionCenter.removeTransaction(transactions);
+                    break;
+                case 4:
+                    managingTransaction = false;
+                    break;
+            }
+        }while(managingTransaction);
+    }
+
 }
