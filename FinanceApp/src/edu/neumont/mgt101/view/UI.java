@@ -51,14 +51,39 @@ public class UI {
 
     //endregion
 
-    //TODO: MAKE MAIN MENU OPTIONS
     public static int mainMenu(String user){
         Console.writeLn("Welcome " + user + "!");
         return Console.getIntInput("""
                 What would you like to do?
                 1. Log out
-                (Sample)
-                """, 1, 1);
+                2. Manage Transactions
+                """, 1, 2);
+    }
+
+    public static int transactionMenu(){
+        return Console.getIntInput("""
+                What would you like to do?
+                1. Add Transaction
+                2. List Transactions
+                3. Remove Transaction
+                4. Back
+                """, 1, 4);
+    }
+
+    public static String addTransaction(){
+        return Console.getStringInput("""
+                Add a transaction to record! ("!" to cancel)
+                """);
+    }
+
+    public static void listTransactions(String item, int index){
+        Console.writeLn(index + ". " + item);
+    }
+
+    public static String removeTransaction(){
+        return Console.getStringInput("""
+                Write a transaction to remove! ("!" to cancel)
+                """);
     }
 
     public static void error(int reason){
@@ -75,6 +100,13 @@ public class UI {
                 break;
             case 4:
                 Console.writeLn("User not created.");
+                break;
+            case 5:
+                Console.writeLn("Item does not exist.");
+                break;
+            case 6:
+                Console.writeLn("This is empty.");
+                break;
         }
     }
 
@@ -86,6 +118,13 @@ public class UI {
                 break;
             case 2:
                 Console.writeLn("Logged in.");
+                break;
+            case 3:
+                Console.writeLn("Transaction added.");
+                break;
+            case 4:
+                Console.writeLn("Transaction removed.");
+                break;
         }
     }
 
@@ -94,6 +133,11 @@ public class UI {
             case 1:
                 Console.writeLn("Log out?");
                 break;
+            case 2:
+                Console.writeLn("Add this transaction?");
+                break;
+            case 3:
+                Console.writeLn("Remove this transaction?");
         }
         return Console.getIntInput("""
                 Confirm:
